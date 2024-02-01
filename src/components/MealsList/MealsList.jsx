@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, {useState, useEffect} from "react";
+import { Link } from "react-router-dom";
 import Card from '../Card/Card';
 
 const MealsList = () => {
@@ -12,11 +13,11 @@ const MealsList = () => {
         const res = await axios.get('https://www.themealdb.com/api/json/v1/1/categories.php');
         const json = res.data;
         const mealCategoy = json.categories;
-        console.log(mealCategoy);
         const mealsArray = mealCategoy.map(element => {
           return{
             categoryName: element.strCategory,
-            categoryImg: element.strCategoryThumb
+            categoryImg: element.strCategoryThumb,
+            categoryDescription: element.strCategoryDescription
           }
         });
         setMeals(mealsArray);
@@ -27,7 +28,9 @@ const MealsList = () => {
     fetchMeals(); 
   }, []);
 
-  const paintCards = () => meals.map((meal, i)=> <Card meal={meal} key={i}/>);
+  const getDescription = (str) => console.log(str)
+
+  const paintCards = () => meals.map((meal, i)=> <Link to={`/category/?filter=${meal.categoryName}`} key={i}><Card meal={meal} getDescription={()=>getDescription(meal.categoryDescription)}/></Link>);
 
   return <div>
             {paintCards()}
