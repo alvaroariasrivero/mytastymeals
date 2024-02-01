@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import Card from '../Card/Card';
 
-const MealsList = () => {
+const MealsList = ({setDescription}) => {
 
   const [meals, setMeals] = useState([]);
 
@@ -28,7 +28,7 @@ const MealsList = () => {
     fetchMeals(); 
   }, []);
 
-  const getDescription = (str) => console.log(str)
+  const getDescription = (str) => setDescription(str);
 
   const paintCards = () => meals.map((meal, i)=> <Link to={`/category/?filter=${meal.categoryName}`} key={i}><Card meal={meal} getDescription={()=>getDescription(meal.categoryDescription)}/></Link>);
 

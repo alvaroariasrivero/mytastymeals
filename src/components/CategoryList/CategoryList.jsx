@@ -1,9 +1,9 @@
 import React from "react";
 
-const CategoryList = () => {
+const CategoryList = ({description}) => {
 
     return <div>
-                CategoryList
+                <p>{description}</p>
             </div>
 };
 
