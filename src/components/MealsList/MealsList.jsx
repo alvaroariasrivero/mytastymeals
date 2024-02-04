@@ -28,9 +28,9 @@ const MealsList = ({setDescription}) => {
     fetchMeals(); 
   }, []);
 
-  const getDescription = (str) => setDescription(str);
+  const getDescription = (arr) => setDescription(arr);
 
-  const paintCards = () => meals.map((meal, i)=> <Link to={`/category/?filter=${meal.categoryName}`} key={i}><Card meal={meal} getDescription={()=>getDescription(meal.categoryDescription)}/></Link>);
+  const paintCards = () => meals.map((meal, i)=> <Link to={`/category/?filter=${meal.categoryName}`} key={i}><Card meal={meal} getDescription={()=>getDescription({title: meal.categoryName, description: meal.categoryDescription})}/></Link>);
 
   return <div>
             {paintCards()}

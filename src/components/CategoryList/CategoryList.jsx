@@ -27,7 +27,8 @@ const CategoryList = ({description}) => {
     const { data: meals, loading } = useDataLoader(listByCategory, searchParams.get('filter'));
 
     return <div>
-                <p className='yepa'>{description}</p>
+                <h2>{description.title}</h2>
+                <p>{description.description}</p>
                 {loading 
                 ? <div>Loading...</div>
                 : meals.map(meal => <Card meal={meal} key={meal.idMeal}></Card>)

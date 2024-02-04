@@ -6,7 +6,12 @@ import CategoryList from '../CategoryList/CategoryList';
 
 const Main = () => {
 
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState(
+    {
+      title: '',
+      description: ''
+    }
+  );
 
   return <main>
     <Routes>
