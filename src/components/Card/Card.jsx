@@ -6,7 +6,7 @@ const Card = ({getDescription, meal}) => {
 
   return <div className="Card" onClick={getDescription}>
             <img src={categoryImg} alt="meal-img" />
-            <h2>{categoryName}</h2>
+            <h3>{categoryName}</h3>
           </div>
 };
 

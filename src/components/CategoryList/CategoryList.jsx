@@ -31,7 +31,7 @@ const CategoryList = ({description}) => {
                 <p>{description.description}</p>
                 {loading 
                 ? <div>Loading...</div>
-                : meals.map(meal => <Card meal={meal} key={meal.idMeal}></Card>)
+                : meals.map(meal => <Card meal={meal} key={meal.mealId}></Card>)
                 }
             </div>
 };
