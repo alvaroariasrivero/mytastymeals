@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Routes, Route} from 'react-router-dom';
-import './Main.css';
 import MealsList from '../MealsList/MealsList';
 import CategoryList from '../CategoryList/CategoryList';
+import MealPage from '../MealPage/MealPage';
 
 const Main = () => {
 
@@ -17,6 +17,7 @@ const Main = () => {
     <Routes>
       <Route path='/' element={<MealsList setDescription={setDescription}/>}/>
       <Route path='/category' element={<CategoryList description={description}/>} />
+      <Route path='/recipe' element={<MealPage description={description}/>} />
     </Routes>
   </main>
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import { useDataLoader } from 'react-use-data-loader';
 import Card from '../Card/Card';
 
@@ -31,7 +31,7 @@ const CategoryList = ({description}) => {
                 <p>{description.description}</p>
                 {loading 
                 ? <div>Loading...</div>
-                : meals.map(meal => <Card meal={meal} key={meal.mealId}></Card>)
+                : meals.map(meal => <Link to={`/recipe/?filter=${meal.categoryName}`} key={meal.mealId}><Card meal={meal}></Card></Link>)
                 }
             </div>
 };
