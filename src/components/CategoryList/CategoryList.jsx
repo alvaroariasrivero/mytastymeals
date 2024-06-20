@@ -26,6 +26,18 @@ const CategoryList = ({description}) => {
     const [searchParams] = useSearchParams();
     const { data: meals, loading } = useDataLoader(listByCategory, searchParams.get('filter'));
 
+    const saveDescription = () => {
+        if(description.title && description.description){
+            localStorage.setItem("description title",description.title);
+            localStorage.setItem("description",description.description);
+        }else{
+            description.title = localStorage.getItem("description title");
+            description.description = localStorage.getItem("description");
+        }
+    };
+
+    saveDescription();
+
     return <div>
                 <h2>{description.title}</h2>
                 <p>{description.description}</p>
