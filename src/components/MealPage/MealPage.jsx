@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import DOMPurify from 'dompurify';
 import { useSearchParams } from "react-router-dom";
 import { useDataLoader } from 'react-use-data-loader';
 
@@ -36,7 +37,15 @@ const MealPage = () => {
 
     const [searchParams] = useSearchParams();
     const { data: recipeCopy, loading } = useDataLoader(mealByName, searchParams.get('filter'));
+    const [sanitizedRecipe, setSanitizedRecipe] = useState('');
 
+    useEffect(() => {
+        if (!loading && recipeCopy && recipeCopy.strInstructions) {
+            const sanitizedInstructions = DOMPurify.sanitize(recipeCopy.strInstructions, { ALLOWED_TAGS: [] });
+            setSanitizedRecipe(sanitizedInstructions);
+        }
+    }, [recipeCopy, loading]);
+    
     const paintIngredients = () => recipeCopy.ingredients.map((ingredient, i) => <li key={i}>{ingredient.ingredient} - {ingredient.measure}</li>)
 
     return <>
@@ -49,6 +58,7 @@ const MealPage = () => {
                     <ul>
                         {paintIngredients()}
                     </ul>
+                    <p dangerouslySetInnerHTML={{ __html: sanitizedRecipe.replace(/\r\n/g, '<br/>') }} />
                 </div>
                 }
             </>
